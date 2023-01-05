@@ -63,18 +63,10 @@ jobs:
       - name: Modify coti-node Repository
         run: |
           new_node_version=$(curl -sL https://api.github.com/repos/coti-io/coti-node/releases/latest | jq -r ".tag_name")
-          echo "RELEASE_VERSION=${{ steps.get-latest-release.outputs.release }}" >> $GITHUB_ENV
           git clone https://github.com/coti-io/coti-node --branch $new_node_version
           source_dir=coti-node
 
           # Modify the Dockerfile
-          add_line_1="RUN wget https://www.dropbox.com/s/rpyercs56zmay0z/FullNode1_clusterstamp.csv -P ."
-          add_line_2="RUN chown root:root FullNode1_clusterstamp.csv && chgrp root FullNode1_clusterstamp.csv"
-          num_lines=$(wc -l < ./$source_dir/Dockerfile)
-          sed -i "${num_lines}i\\$add_line_1\\" $source_dir/Dockerfile
-          num_lines=$(wc -l < ./$source_dir/Dockerfile)
-          sed -i "${num_lines}i\\$add_line_2\\" $source_dir/Dockerfile
-          # Make Maven less verbose
           sed -i "s/-am/-am -B/g" $source_dir/Dockerfile
 
           # Copy update-env

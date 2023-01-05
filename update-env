@@ -1,3 +1,5 @@
+# Credit: Most of the code here is written by GeordieR
+
 set -eu pipefail # fail on error , debug all lines
 
 SERVERURL=https://$SERVERNAME
@@ -5,6 +7,11 @@ SERVERIP=$(curl ifconfig.me)
 logging_file_name="FullNode1";
 data_dir=/app/data
 mkdir -p $data_dir
+
+#########################################
+# Generate fullnode.properties
+#########################################
+
 if [[ $ACTION == "testnet" ]];
 then
 echo "Detected Server IP: $SERVERIP"
@@ -64,3 +71,18 @@ fi
 
 chown root:root $data_dir/fullnode.properties
 chgrp root $data_dir/fullnode.properties
+
+#########################################
+# Download Clusterstamp
+#########################################
+
+if [[ $ACTION == "testnet" ]];
+then
+  wget https://www.dropbox.com/s/rpyercs56zmay0z/FullNode1_clusterstamp.csv -P .
+elif [[ $ACTION == "mainnet" ]];
+then
+  wget https://coti.tips/downloads/FullNode1_clusterstamp.csv -P .
+fi
+
+chown root:root ./FullNode1_clusterstamp.csv
+chgrp root ./FullNode1_clusterstamp.csv
