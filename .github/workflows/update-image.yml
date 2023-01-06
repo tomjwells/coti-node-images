@@ -16,20 +16,18 @@ jobs:
   check-for-new-release:
     runs-on: ubuntu-latest
     steps:
-      - id: get-latest-release
-        uses: pozetroninc/github-action-get-latest-release@master
-        with:
-          repository: coti-io/coti-node
       - name: Compare versions
         id: compare-latest-release-with-readme
+        shell: zsh
         run: |
+          LATEST_RELEASE=$(curl -sL https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name")
           EXISTING_VERSIONS=$(curl -L -s 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[]["name"]')
-          IS_NEW_RELEASE=$([[ $EXISTING_VERSIONS == *"${{ steps.get-latest-release.outputs.release }}"* ]]; then echo "❌"; else echo "✅"; fi)
+          IS_NEW_RELEASE=$(if [[ $EXISTING_VERSIONS == *"$LATEST_RELEASE"* ]]; then echo "❌"; else echo "✅"; fi)
           echo "IS_NEW_RELEASE=$IS_NEW_RELEASE" >> $GITHUB_ENV
-          echo "RELEASE_VERSION=${{ steps.get-latest-release.outputs.release }}" >> $GITHUB_ENV
-          if [ ${{env.IS_NEW_RELEASE}} == "✅" ]; then
-            echo "New release found (version ${{ steps.get-latest-release.outputs.release }})."
-          elif [ ${{env.IS_NEW_RELEASE}} == "❌" ]; then
+          echo "RELEASE_VERSION=$LATEST_RELEASE" >> $GITHUB_ENV
+          if [[ $IS_NEW_RELEASE == "✅" ]]; then
+            echo "New release found (version $LATEST_RELEASE)."
+          elif [[ $IS_NEW_RELEASE == "❌" ]]; then
             echo "No new release found. Workflow run has completed successfully."
           fi
     outputs:
