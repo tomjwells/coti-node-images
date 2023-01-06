@@ -86,3 +86,16 @@ fi
 
 chown root:root ./FullNode1_clusterstamp.csv
 chgrp root ./FullNode1_clusterstamp.csv
+
+#########################################
+# Set dbrecovery and db.restore
+#########################################
+
+#IF mainnet lets download the dbrecovery and set db.restore to true!
+# if [[ $DB_RECOVERY == "true" ]];
+# then
+# wget -O ./dbrecovery.sh https://raw.githubusercontent.com/Geordie-R/coti-full-node/main/dbrecovery.sh
+# chmod +x ./dbrecovery.sh
+# echo "Turning dbrecovery on"
+# ./dbrecovery.sh "true" "$data_dir" "$ACTION" 
+# fi

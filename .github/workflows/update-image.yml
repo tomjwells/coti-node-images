@@ -23,9 +23,15 @@ jobs:
       - name: Compare versions
         id: compare-latest-release-with-readme
         run: |
-          git clone https://github.com/tj-wells/coti-node && cd coti-node
-          echo "IS_NEW_RELEASE=$(if [[ ! -z $(grep "${{ steps.get-latest-release.outputs.release }}" "README.md") ]]; then echo "❌"; else echo "✅"; fi)" >> $GITHUB_ENV
+          EXISTING_VERSIONS=$(curl -L -s 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[]["name"]')
+          IS_NEW_RELEASE=$([[ $EXISTING_VERSIONS == *"${{ steps.get-latest-release.outputs.release }}"* ]]; then echo "❌"; else echo "✅"; fi)
+          echo "IS_NEW_RELEASE=$IS_NEW_RELEASE" >> $GITHUB_ENV
           echo "RELEASE_VERSION=${{ steps.get-latest-release.outputs.release }}" >> $GITHUB_ENV
+          if [ ${{env.IS_NEW_RELEASE}} == "✅" ]; then
+            echo "New release found (version ${{ steps.get-latest-release.outputs.release }})."
+          elif [ ${{env.IS_NEW_RELEASE}} == "❌" ]; then
+            echo "No new release found. Workflow run has completed successfully."
+          fi
     outputs:
       is-new-release: ${{env.IS_NEW_RELEASE}}
       release-version: ${{env.RELEASE_VERSION}}
@@ -62,15 +68,8 @@ jobs:
 
       - name: Modify coti-node Repository
         run: |
-          new_node_version=$(curl -sL https://api.github.com/repos/coti-io/coti-node/releases/latest | jq -r ".tag_name")
-          git clone https://github.com/coti-io/coti-node --branch $new_node_version
-          source_dir=coti-node
-
-          # Modify the Dockerfile
-          sed -i "s/-am/-am -B/g" $source_dir/Dockerfile
-
-          # Copy update-env
-          cp update-env $source_dir
+          git clone https://github.com/coti-io/coti-node --branch ${{ needs.check-for-new-release.outputs.release-version }}
+          cp update-env coti-node
 
       - name: Cache Docker layers
         uses: actions/cache@v2
