@@ -18,7 +18,7 @@ This section provides a high-level overview of the build process executed by <a 
 
 1. Download the new official Coti release.
 2. Modify the `Dockerfile` to download the clusterstamp file.
-3. Copy a script (`update-env`), which uses the container's environment variables to generates a new `fullnode.properties` file.
+3. Copy a script (`update-env`), which uses the container's environment variables to generate a new `fullnode.properties` file.
 
 # Stay Coti
 
