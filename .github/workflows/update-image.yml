@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install zsh
-        run: sudo apt-get update; sudo apt-get install zsh
+        run: sudo apt-get install zsh
       - name: Compare versions
         id: compare-latest-release-with-readme
         shell: zsh {0}
