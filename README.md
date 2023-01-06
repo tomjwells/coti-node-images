@@ -8,13 +8,13 @@ This repository executes the build process of the coti-node images in an open-so
 
 This repository makes use of a Github actions workflow, to check for new releases of the coti-node in the <a href="https://github.com/coti-io/coti-node">official coti-node repository</a> every morning, and if a new version is available, it executes a build of the new release.
 
-- To view the workflow file that shows the steps of the build process, <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml">click here</a>.
-- To view the runs of the workflows themselves, <a href="https://github.com/tj-wells/coti-node-images/actions">click here</a>.
-- To view the images built and pushed by this repository, <a href="https://hub.docker.com/repository/docker/atomnode/coti-node">click here</a>.
+- To view the workflow file that shows the steps of the build process, <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml"  target="_blank">click here</a>.
+- To view the historical runs of the workflows themselves, <a href="https://github.com/tj-wells/coti-node-images/actions"  target="_blank">click here</a>.
+- To view the images built and pushed by this repository, <a href="https://hub.docker.com/r/atomnode/coti-node"  target="_blank">click here</a>.
 
 # Overview of the Build Process
 
-This section provides a high-level overview of the build process executed by <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml">this workflow file</a>.
+This section provides a high-level overview of the build process executed by <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml"  target="_blank">this workflow file</a>.
 
 1. Download the new official Coti release.
 2. Modify the `Dockerfile` to download the clusterstamp file.
