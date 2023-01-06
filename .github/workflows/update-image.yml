@@ -16,9 +16,11 @@ jobs:
   check-for-new-release:
     runs-on: ubuntu-latest
     steps:
+      - name: Install zsh
+        run: sudo apt-get update; sudo apt-get install zsh
       - name: Compare versions
         id: compare-latest-release-with-readme
-        shell: zsh
+        shell: zsh {0}
         run: |
           LATEST_RELEASE=$(curl -sL https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name")
           EXISTING_VERSIONS=$(curl -L -s 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[]["name"]')
