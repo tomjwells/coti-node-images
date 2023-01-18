@@ -1,6 +1,6 @@
-# COTI Node Image Builder
+# Coti Node Image Builder
 
-This repository supplements the repository, <a href="https://github.com/tj-wells/coti-node" target="_blank">COTI Node Docker Installation Method</a>, which proposes a simple method for installing and maintaining Coti nodes using Docker containers.
+This repository supplements the repository, <a href="https://github.com/tj-wells/coti-node" target="_blank">Coti Node Docker Installation Method</a>, which proposes a simple method for installing and maintaining Coti nodes using Docker containers.
 
 This repository executes the build process of the coti-node images in an open-source and publicly transparent way, so that the images it generates can be trusted. In addition, others can produce their own images by cloning this repository and making variations.
 
@@ -15,6 +15,8 @@ This repository makes use of a Github actions workflow, to check for new release
 # Overview of the Build Process
 
 This section provides a high-level overview of the build process executed by <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml"  target="_blank">this workflow file</a>.
+
+The steps implemented in the workflow are as follows.
 
 1. Download the new official Coti release.
 2. Modify the `Dockerfile` to download the clusterstamp file.

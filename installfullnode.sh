@@ -557,7 +557,3 @@ then
 echo "Turning dbrecovery off"
 /home/$username/dbrecovery.sh "false" "$username" "$action"
 fi
-
-SO questions:
-(1) is it bc the db gets corrupted someimtes?
-(2) why does he turn it off later
