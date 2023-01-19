@@ -34,7 +34,7 @@ jobs:
           if [[ $IS_NEW_RELEASE == "✅" ]]; then
             echo "✅ New release found (version $LATEST_RELEASE)."
           elif [[ $IS_NEW_RELEASE == "❌" ]]; then
-            echo "✨ No new release found. The latest release is v$RELEASE_VERSION and the latest image version is v$LATEST_IMAGE. No build needed. This workflow run has completed successfully."
+            echo "✨ No new release found. The latest release is $LATEST_RELEASE and the latest image version is $LATEST_IMAGE. No build needed. This workflow run has completed successfully."
           fi
     outputs:
       is-new-release: ${{env.IS_NEW_RELEASE}}
