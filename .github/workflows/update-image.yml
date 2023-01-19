@@ -14,6 +14,7 @@ env:
 
 jobs:
   check-for-new-release:
+    name: Check for new release
     runs-on: ubuntu-latest
     steps:
       - name: Install zsh
@@ -35,14 +36,12 @@ jobs:
           elif [[ $IS_NEW_RELEASE == "❌" ]]; then
             echo "✨ No new release found. The latest release is v$RELEASE_VERSION and the latest image version is v$LATEST_IMAGE. No build needed. This workflow run has completed successfully."
           fi
-          echo "DATE=$(date +'%d/%m/%Y')" >> $GITHUB_ENV
-      - name: Rename workflow run
-        run-name: Check for new coti-node version - ${{ env.DATE }}
     outputs:
       is-new-release: ${{env.IS_NEW_RELEASE}}
       release-version: ${{env.RELEASE_VERSION}}
 
   build-and-push:
+    name: Build and push new release
     runs-on: ubuntu-latest
     needs: [check-for-new-release]
     if: ${{ needs.check-for-new-release.outputs.is-new-release == '✅' }}
@@ -102,6 +101,3 @@ jobs:
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-
-      - name: Rename workflow run
-        run-name: Build coti-node, version ${{ needs.check-for-new-release.outputs.release-version }}
