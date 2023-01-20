@@ -67,7 +67,7 @@ jobs:
         with:
           images: ${{env.DOCKERHUB_USERNAME}}/${{ env.IMAGE_NAME }}
           flavor: |
-            latest=false
+            latest=true
           tags: |
             type=semver,pattern={{version}},value=${{needs.check-for-new-release.outputs.release-version}}
 
