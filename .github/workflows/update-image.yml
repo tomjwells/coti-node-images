@@ -29,7 +29,7 @@ jobs:
           # Occasionally LATEST_RELEASE is null for an unknown reason
           while [[ $LATEST_RELEASE == "null" ]]; do
             LATEST_RELEASE=$(curl ${CURL_ARGS[@]} https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
-          fi
+          done
 
           IS_NEW_RELEASE=$(if [[ $AVAILABLE_IMAGES == *"$LATEST_RELEASE"* ]]; then echo "❌"; else echo "✅"; fi)
 
