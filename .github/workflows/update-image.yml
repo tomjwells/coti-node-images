@@ -1,4 +1,4 @@
-name: Build Docker Container & Push to Registry
+name: Build Image & Push to Dockerhub
 
 on:
   schedule:
@@ -17,16 +17,14 @@ jobs:
     name: Check for new release
     runs-on: ubuntu-latest
     steps:
-      # - name: Install zsh
-      #   run: sudo apt-get install zsh
       - name: Compare versions
         id: compare-latest-release-with-readme
-        # shell: zsh {0}
         shell: bash
         run: |
-          LATEST_RELEASE=$(curl -sL https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
-          AVAILABLE_IMAGES=$(curl -L -s 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[]["name"]')
-          LATEST_IMAGE=$(curl -L -s 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[1]["name"]')
+          CURL_ARGS=("-sL" "--connect-timeout" "5" "--max-time" "10" "--retry" "5" "--retry-delay" "0" "--retry-max-time" "40")
+          LATEST_RELEASE=$(curl ${CURL_ARGS[@]} https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
+          AVAILABLE_IMAGES=$(curl ${CURL_ARGS[@]} 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[]["name"]')
+          LATEST_IMAGE=$(curl ${CURL_ARGS[@]} 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[1]["name"]' | tr -d '"')
 
           IS_NEW_RELEASE=$(if [[ $AVAILABLE_IMAGES == *"$LATEST_RELEASE"* ]]; then echo "❌"; else echo "✅"; fi)
 
