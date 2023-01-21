@@ -2,7 +2,7 @@ name: Build Image & Push to Dockerhub
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '*/5 * * * *'
     # https://github.blog/changelog/2019-11-01-github-actions-scheduled-jobs-maximum-frequency-is-changing/
   push:
     branches:

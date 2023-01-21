@@ -19,7 +19,7 @@ This section provides a high-level overview of the build process executed by <a 
 The steps implemented in the workflow are as follows.
 
 1. Download the new official Coti release.
-2. Copy a script (`update-env`), which uses the container's environment variables to generate a new `fullnode.properties` file.
+2. Copy a script (<a href="https://github.com/tj-wells/coti-node-images/blob/master/update-env" target="_blank">update-env</a>), which uses the container's environment variables to generate a new `fullnode.properties` file.
 
 # Stay Coti
 
