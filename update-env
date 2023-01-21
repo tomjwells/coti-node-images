@@ -76,16 +76,21 @@ chgrp root $data_dir/fullnode.properties
 # Download Clusterstamp
 #########################################
 
-if [[ $ACTION == "testnet" ]];
-then
-  wget https://www.dropbox.com/s/rpyercs56zmay0z/FullNode1_clusterstamp.csv -P .
-elif [[ $ACTION == "mainnet" ]];
-then
-  wget https://coti.tips/downloads/FullNode1_clusterstamp.csv -P .
+CLUSTERSTAMP_FILE=$data_dir/FullNode1_clusterstamp.csv
+if [ -f $FILE ]; then
+  echo "Clusterstamp $CLUSTERSTAMP_FILE exists."
+else
+  if [[ $ACTION == "testnet" ]];
+  then
+    wget https://www.dropbox.com/s/rpyercs56zmay0z/FullNode1_clusterstamp.csv -P $CLUSTERSTAMP_FILE
+  elif [[ $ACTION == "mainnet" ]];
+  then
+    wget https://coti.tips/downloads/FullNode1_clusterstamp.csv -P $CLUSTERSTAMP_FILE
+  fi
 fi
 
-chown root:root ./FullNode1_clusterstamp.csv
-chgrp root ./FullNode1_clusterstamp.csv
+chown root:root $CLUSTERSTAMP_FILE
+chgrp root $CLUSTERSTAMP_FILE
 
 #########################################
 # Set dbrecovery and db.restore

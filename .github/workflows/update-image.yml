@@ -26,6 +26,11 @@ jobs:
           AVAILABLE_IMAGES=$(curl ${CURL_ARGS[@]} 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[]["name"]')
           LATEST_IMAGE=$(curl ${CURL_ARGS[@]} 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[1]["name"]' | tr -d '"')
 
+          # Occasionally LATEST_RELEASE is null for an unknown reason
+          while [[ $LATEST_RELEASE == "null" ]]; do
+            LATEST_RELEASE=$(curl ${CURL_ARGS[@]} https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
+          fi
+
           IS_NEW_RELEASE=$(if [[ $AVAILABLE_IMAGES == *"$LATEST_RELEASE"* ]]; then echo "❌"; else echo "✅"; fi)
 
           if [[ $IS_NEW_RELEASE == "✅" ]]; then

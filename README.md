@@ -2,7 +2,9 @@
 
 This repository supplements the repository, <a href="https://github.com/tj-wells/coti-node" target="_blank">Coti Node Docker Installation Method</a>, which proposes a simple method for installing and maintaining Coti nodes using Docker containers.
 
-This repository executes the build process of the coti-node images in an open-source and publicly transparent way, so that the images it generates can be trusted. In addition, others can produce their own images by cloning this repository and making variations.
+This repository executes the build process of the coti-node images in an open-source and publicly transparent way, so that the images it generates can be trusted.
+
+As well as directly building and pushing pushing coti-node images to <a href="https://hub.docker.com/r/atomnode/coti-node"  target="_blank">this Dockerhub registry</a>, readers are encouraged to clone or fork the respository to make their own images, or use the scripts here to inspire their own scripts and variations.
 
 # What does this Repository do?
 
