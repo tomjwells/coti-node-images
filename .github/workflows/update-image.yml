@@ -2,8 +2,8 @@ name: Build Docker Container & Push to Registry
 
 on:
   schedule:
-    - cron: '0 9 * * *'
-    # Runs once a day at 9 am
+    - cron: '* * * * *'
+    # https://github.blog/changelog/2019-11-01-github-actions-scheduled-jobs-maximum-frequency-is-changing/
   push:
     branches:
       - 'master'
@@ -17,25 +17,27 @@ jobs:
     name: Check for new release
     runs-on: ubuntu-latest
     steps:
-      - name: Install zsh
-        run: sudo apt-get install zsh
+      # - name: Install zsh
+      #   run: sudo apt-get install zsh
       - name: Compare versions
         id: compare-latest-release-with-readme
-        shell: zsh {0}
+        # shell: zsh {0}
+        shell: bash
         run: |
           LATEST_RELEASE=$(curl -sL https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
           AVAILABLE_IMAGES=$(curl -L -s 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[]["name"]')
-          LATEST_IMAGE=$(curl -L -s 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[0]["name"]')
+          LATEST_IMAGE=$(curl -L -s 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[1]["name"]')
 
           IS_NEW_RELEASE=$(if [[ $AVAILABLE_IMAGES == *"$LATEST_RELEASE"* ]]; then echo "❌"; else echo "✅"; fi)
 
-          echo "IS_NEW_RELEASE=$IS_NEW_RELEASE" >> $GITHUB_ENV
-          echo "RELEASE_VERSION=$LATEST_RELEASE" >> $GITHUB_ENV
           if [[ $IS_NEW_RELEASE == "✅" ]]; then
             echo "✅ New release found (version $LATEST_RELEASE)."
           elif [[ $IS_NEW_RELEASE == "❌" ]]; then
             echo "✨ No new release found. The latest release is $LATEST_RELEASE and the latest image version is $LATEST_IMAGE. No build needed. This workflow run has completed successfully."
           fi
+
+          echo "IS_NEW_RELEASE=$IS_NEW_RELEASE" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=$LATEST_RELEASE" >> $GITHUB_ENV
     outputs:
       is-new-release: ${{env.IS_NEW_RELEASE}}
       release-version: ${{env.RELEASE_VERSION}}
