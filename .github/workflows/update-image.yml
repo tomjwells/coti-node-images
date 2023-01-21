@@ -21,14 +21,18 @@ jobs:
         id: compare-latest-release-with-readme
         shell: bash
         run: |
-          CURL_ARGS=("-sL" "--connect-timeout" "5" "--max-time" "10" "--retry" "5" "--retry-delay" "0" "--retry-max-time" "40")
+          # CURL_ARGS=("-sL" "--connect-timeout" "5" "--max-time" "10" "--retry" "5" "--retry-delay" "0" "--retry-max-time" "40")
+          CURL_ARGS=("-sL")
           LATEST_RELEASE=$(curl ${CURL_ARGS[@]} https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
           AVAILABLE_IMAGES=$(curl ${CURL_ARGS[@]} 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[]["name"]')
           LATEST_IMAGE=$(curl ${CURL_ARGS[@]} 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[1]["name"]' | tr -d '"')
 
           # Occasionally LATEST_RELEASE is null for an unknown reason
+          count=0
           while [[ $LATEST_RELEASE == "null" ]]; do
+            printf 'While loop count: %d\n' "$count"
             LATEST_RELEASE=$(curl ${CURL_ARGS[@]} https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
+            (( count++ ))
           done
 
           IS_NEW_RELEASE=$(if [[ $AVAILABLE_IMAGES == *"$LATEST_RELEASE"* ]]; then echo "❌"; else echo "✅"; fi)
