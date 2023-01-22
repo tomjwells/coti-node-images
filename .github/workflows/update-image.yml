@@ -27,13 +27,13 @@ jobs:
 
           def return_json(url):
             s = requests.Session()
-            retries = Retry(total=10, backoff_factor=1, status_forcelist=[500, 501, 502, 503, 504])
+            retries = Retry(total=10, backoff_factor=1, status_forcelist=tuple(x for x in requests.status_codes._codes if x != 200))
             s.mount('https://', HTTPAdapter(max_retries=retries))
             response = s.get(url)
             return response.json()
 
           latest_release = return_json("https://api.github.com/repos/coti-io/coti-node/releases/latest")['tag_name']
-          available_images = [d['name'] for d in return_json("https://hub.docker.com/v2/repositories/atomnode/coti-node/tags")['results']]
+          available_images = [d['name'] for d in return_json("https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags")['results']]
           latest_image = available_images[1]
 
           if latest_release in available_images:
