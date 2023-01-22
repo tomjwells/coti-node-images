@@ -30,8 +30,10 @@ jobs:
           # Occasionally LATEST_RELEASE is null for an unknown reason
           count=0
           while [[ $LATEST_RELEASE == "null" ]]; do
+            CURL_ARGS=("-L")
             printf 'While loop count: %d\n' "$count"
             LATEST_RELEASE=$(curl ${CURL_ARGS[@]} https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
+            echo $LATEST_RELEASE
             (( count++ ))
           done
 
