@@ -19,36 +19,36 @@ jobs:
     steps:
       - name: Compare versions
         id: compare-latest-release-with-readme
-        shell: bash
+        shell: python
         run: |
-          # CURL_ARGS=("-sL" "--connect-timeout" "5" "--max-time" "10" "--retry" "5" "--retry-delay" "0" "--retry-max-time" "40")
-          CURL_ARGS=("-sL")
-          LATEST_RELEASE=$(curl ${CURL_ARGS[@]} https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
-          AVAILABLE_IMAGES=$(curl ${CURL_ARGS[@]} 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[]["name"]')
-          LATEST_IMAGE=$(curl ${CURL_ARGS[@]} 'https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags'|jq '."results"[1]["name"]' | tr -d '"')
+          import os
+          import requests
+          from requests.adapters import HTTPAdapter, Retry
 
-          # Occasionally LATEST_RELEASE is null for an unknown reason
-          count=0
-          while [[ $LATEST_RELEASE == "null" ]]; do
-            CURL_ARGS=("-L")
-            printf 'While loop count: %d\n' "$count"
-            LATEST_RELEASE=$(curl ${CURL_ARGS[@]} https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
-            echo LATEST_RELEASE=$LATEST_RELEASE
-            echo count=$count
-            (( count++ ))
-            echo count=$count
-          done
+          def return_json(url):
+            s = requests.Session()
+            retries = Retry(total=10, backoff_factor=1, status_forcelist=[500, 501, 502, 503, 504])
+            s.mount('https://', HTTPAdapter(max_retries=retries))
+            response = s.get(url)
+            return response.json()
 
-          IS_NEW_RELEASE=$(if [[ $AVAILABLE_IMAGES == *"$LATEST_RELEASE"* ]]; then echo "❌"; else echo "✅"; fi)
+          latest_release = return_json("https://api.github.com/repos/coti-io/coti-node/releases/latest")['tag_name']
+          available_images = [d['name'] for d in return_json("https://hub.docker.com/v2/repositories/atomnode/coti-node/tags")['results']]
+          latest_image = available_images[1]
 
-          if [[ $IS_NEW_RELEASE == "✅" ]]; then
-            echo "✅ New release found (version $LATEST_RELEASE)."
-          elif [[ $IS_NEW_RELEASE == "❌" ]]; then
-            echo "✨ No new release found. The latest release is $LATEST_RELEASE and the latest image version is $LATEST_IMAGE. No build needed. This workflow run has completed successfully."
-          fi
+          if latest_release in available_images:
+            is_new_release = "❌"
+            print(f"✨ No new release found. The latest release is {latest_release} and the latest image version is {latest_image}. No build needed. This workflow run has completed successfully.")
+          elif latest_release not in available_images:
+            is_new_release = "✅"
+            print(f"✅ New release found (version {latest_release}).")
+          else:
+            print("Error")
 
-          echo "IS_NEW_RELEASE=$IS_NEW_RELEASE" >> $GITHUB_ENV
-          echo "RELEASE_VERSION=$LATEST_RELEASE" >> $GITHUB_ENV
+          # Write results to github env
+          with open(os.environ.get('GITHUB_ENV'), 'a') as gh_envs:
+            gh_envs.write(f'IS_NEW_RELEASE={is_new_release}\n')
+            gh_envs.write(f'RELEASE_VERSION={latest_release}\n')
     outputs:
       is-new-release: ${{env.IS_NEW_RELEASE}}
       release-version: ${{env.RELEASE_VERSION}}
