@@ -35,6 +35,7 @@ jobs:
             LATEST_RELEASE=$(curl ${CURL_ARGS[@]} https://api.github.com/repos/coti-io/coti-node/releases/latest | jq ".tag_name" | tr -d '"')
             echo $LATEST_RELEASE
             (( count++ ))
+            echo $count
           done
 
           IS_NEW_RELEASE=$(if [[ $AVAILABLE_IMAGES == *"$LATEST_RELEASE"* ]]; then echo "❌"; else echo "✅"; fi)
