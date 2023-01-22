@@ -10,17 +10,19 @@ As well as directly building and pushing pushing coti-node images to <a href="ht
 
 This repository makes use of a Github actions workflow, to check for new releases of the coti-node in the <a href="https://github.com/coti-io/coti-node">official coti-node repository</a> every morning, and if a new version is available, it executes a build of the new release.
 
+Checks are performed every 10-20 minutes. If a new version is found, the workflow finishes since there is nothing to do. If a new version is found, the workflow proceeds to build an image based on the new Coti release, and push it to the Dockerhub registry.
+
 - To view the workflow file that shows the steps of the build process, <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml"  target="_blank">click here</a>.
 - To view the historical runs of the workflows themselves, <a href="https://github.com/tj-wells/coti-node-images/actions"  target="_blank">click here</a>.
 - To view the images built and pushed by this repository, <a href="https://hub.docker.com/r/atomnode/coti-node"  target="_blank">click here</a>.
 
 # Overview of the Build Process
 
-This section provides a high-level overview of the build process executed by <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml"  target="_blank">this workflow file</a>.
+This section provides a high-level overview of the build process executed by <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml" target="_blank">this workflow file</a>.
 
-The steps implemented in the workflow are as follows.
+The workflow file might seem as if a lot is going on, but most of it is standard to any github action that builds a container image and pushes it to a registry. The important step to understand is the one called "Modify coti-node Repository", which performs the following operations:
 
-1. Download the new official Coti release.
+1. Clone the official Coti release.
 2. Copy a script (<a href="https://github.com/tj-wells/coti-node-images/blob/master/update-env" target="_blank">update-env</a>), which uses the container's environment variables to generate a new `fullnode.properties` file.
 
 # Stay Coti
