@@ -4,7 +4,7 @@ This repository supplements the repository, <a href="https://github.com/tj-wells
 
 This repository executes the build process of the coti-node images in an open-source and publicly transparent way, so that the images it generates can be trusted.
 
-Readers are encouraged to clone or fork the respository to make their own images, or use the scripts here to inspire their own scripts and variations. Alternatively, if you have ideas for how the images can be improved, feel free to let me know or make a pull request.
+If you have ideas for how the images can be improved, feel free to let me know or make a pull request.
 
 # What does this Repository do?
 
