@@ -1,4 +1,4 @@
-name: Build Image & Push to Dockerhub
+name: Build Image if new Release is Found
 
 on:
   schedule:

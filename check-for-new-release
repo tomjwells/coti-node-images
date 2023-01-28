@@ -11,7 +11,7 @@ def get_json(url):
   retries = Retry(total=5, backoff_factor=1, status_forcelist=tuple(x for x in requests.status_codes._codes if x != 200))
   s.mount('https://', HTTPAdapter(max_retries=retries))
   try:
-    response = s.get(url, headers={'User-Agent': 'request'})
+    response = requests.get(url, headers={'User-Agent': 'request'})
     response.raise_for_status()
   except requests.exceptions.HTTPError as err:
     raise SystemExit(err)
@@ -19,7 +19,7 @@ def get_json(url):
 
 
 latest_release = get_json("https://api.github.com/repos/coti-io/coti-node/releases")[0]['tag_name']
-latest_image = get_json("https://hub.docker.com/v2/repositories/atomnode/coti-node/tags")['results'][1]['name']
+latest_image = get_json(f"https://hub.docker.com/v2/repositories/{os.environ.get('DOCKERHUB_USERNAME')}/{os.environ.get('IMAGE_NAME')}/tags")['results'][1]['name']
 
 if latest_release == latest_image:
   is_new_release = "❌"
