@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import os
+
+import requests
+from requests.adapters import HTTPAdapter, Retry
+
+
+def get_json(url):
+  s = requests.Session()
+  retries = Retry(total=5, backoff_factor=1, status_forcelist=tuple(x for x in requests.status_codes._codes if x != 200))
+  s.mount('https://', HTTPAdapter(max_retries=retries))
+  try:
+    response = s.get(url, headers={'User-Agent': 'request'})
+    response.raise_for_status()
+  except requests.exceptions.HTTPError as err:
+    raise SystemExit(err)
+  return response.json()
+
+
+latest_release = get_json("https://api.github.com/repos/coti-io/coti-node/releases")[0]['tag_name']
+latest_image = get_json("https://hub.docker.com/v2/repositories/atomnode/coti-node/tags")['results'][1]['name']
+
+if latest_release == latest_image:
+  is_new_release = "❌"
+  print(f"✨ No new release found. The latest release is {latest_release} and the latest image version is {latest_image}. No build needed. This workflow run has completed successfully.")
+else:
+  is_new_release = "✅"
+  print(f"✅ New release found (version {latest_release}).")
+
+# Write results to github env
+with open(os.environ.get('GITHUB_ENV'), 'a') as gh_envs:
+  gh_envs.write(f'IS_NEW_RELEASE={is_new_release}\n')
+  gh_envs.write(f'RELEASE_VERSION={latest_release}\n')
