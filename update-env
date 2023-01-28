@@ -1,4 +1,6 @@
-# Credit: Most of the code here is written by GeordieR
+# Credit:
+# Most of the code here is adapted from scripts written by GeordieR <https://github.com/Geordie-R>
+#
 
 set -eu pipefail # fail on error , debug all lines
 
@@ -82,15 +84,16 @@ if [ -f $FILE ]; then
 else
   if [[ $ACTION == "testnet" ]];
   then
-    wget https://www.dropbox.com/s/rpyercs56zmay0z/FullNode1_clusterstamp.csv -P $CLUSTERSTAMP_FILE
+    CLUSTERSTAMP_URL=https://www.dropbox.com/s/rpyercs56zmay0z/FullNode1_clusterstamp.csv
   elif [[ $ACTION == "mainnet" ]];
   then
-    wget https://coti.tips/downloads/FullNode1_clusterstamp.csv -P $CLUSTERSTAMP_FILE
+    CLUSTERSTAMP_URL=https://coti.tips/downloads/FullNode1_clusterstamp.csv
   fi
+  wget $CLUSTERSTAMP_URL -P $CLUSTERSTAMP_FILE
+  chown root:root $CLUSTERSTAMP_FILE
+  chgrp root $CLUSTERSTAMP_FILE
 fi
 
-chown root:root $CLUSTERSTAMP_FILE
-chgrp root $CLUSTERSTAMP_FILE
 
 #########################################
 # Set dbrecovery and db.restore

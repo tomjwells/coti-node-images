@@ -17,38 +17,8 @@ jobs:
     name: Check for new release
     runs-on: ubuntu-latest
     steps:
-      - name: Compare versions
-        id: compare-latest-release-with-readme
-        shell: python
-        run: |
-          import os
-          import requests
-          from requests.adapters import HTTPAdapter, Retry
-
-          def return_json(url):
-            s = requests.Session()
-            retries = Retry(total=10, backoff_factor=1, status_forcelist=tuple(x for x in requests.status_codes._codes if x != 200))
-            s.mount('https://', HTTPAdapter(max_retries=retries))
-            response = s.get(url)
-            return response.json()
-
-          latest_release = return_json("https://api.github.com/repos/coti-io/coti-node/releases/latest")['tag_name']
-          available_images = [d['name'] for d in return_json("https://hub.docker.com/v2/repositories/${{env.DOCKERHUB_USERNAME}}/${{env.IMAGE_NAME}}/tags")['results']]
-          latest_image = available_images[1]
-
-          if latest_release in available_images:
-            is_new_release = "❌"
-            print(f"✨ No new release found. The latest release is {latest_release} and the latest image version is {latest_image}. No build needed. This workflow run has completed successfully.")
-          elif latest_release not in available_images:
-            is_new_release = "✅"
-            print(f"✅ New release found (version {latest_release}).")
-          else:
-            print("Error")
-
-          # Write results to github env
-          with open(os.environ.get('GITHUB_ENV'), 'a') as gh_envs:
-            gh_envs.write(f'IS_NEW_RELEASE={is_new_release}\n')
-            gh_envs.write(f'RELEASE_VERSION={latest_release}\n')
+      - name: Check for a new release
+        run: ./check-for-new-release
     outputs:
       is-new-release: ${{env.IS_NEW_RELEASE}}
       release-version: ${{env.RELEASE_VERSION}}

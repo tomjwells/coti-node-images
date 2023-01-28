@@ -1,2 +1,4 @@
 **.env
 **tmp**
+**reset_transactions.sh**
+**installfullnode.sh**
