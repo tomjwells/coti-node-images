@@ -7,7 +7,8 @@ import requests
 
 def get_json(url):
   try:
-    response = requests.get(url, headers={'User-Agent': 'request', 'Authorization': f"Bearer {os.environ.get('GITHUB_TOKEN')}"})
+    headers = {'User-Agent': 'request', 'Authorization': f"Bearer {os.environ.get('GITHUB_TOKEN')}"} if url.contains('api.github.com') else {'User-Agent': 'request'}
+    response = requests.get(url, headers=headers)
     response.raise_for_status()
   except requests.exceptions.HTTPError as err:
     raise SystemExit(err)
