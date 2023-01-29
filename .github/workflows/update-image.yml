@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Check for a new release
-        - env:
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./check-for-new-release
     outputs:
