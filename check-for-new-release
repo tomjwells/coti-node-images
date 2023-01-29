@@ -3,15 +3,11 @@
 import os
 
 import requests
-from requests.adapters import HTTPAdapter, Retry
 
 
 def get_json(url):
-  s = requests.Session()
-  retries = Retry(total=5, backoff_factor=1, status_forcelist=tuple(x for x in requests.status_codes._codes if x != 200))
-  s.mount('https://', HTTPAdapter(max_retries=retries))
   try:
-    response = requests.get(url, headers={'User-Agent': 'request'})
+    response = requests.get(url, headers={'User-Agent': 'request', 'Authorization': f"Bearer {os.environ.get('GITHUB_TOKEN')}"})
     response.raise_for_status()
   except requests.exceptions.HTTPError as err:
     raise SystemExit(err)

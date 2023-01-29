@@ -9,6 +9,7 @@ SERVERIP=$(curl ifconfig.me)
 logging_file_name="FullNode1";
 data_dir=/app/data
 mkdir -p $data_dir
+fullnode_properties=$data_dir/fullnode.properties
 
 #########################################
 # Generate fullnode.properties
@@ -17,7 +18,7 @@ mkdir -p $data_dir
 if [[ $ACTION == "testnet" ]];
 then
 echo "Detected Server IP: $SERVERIP"
-cat <<EOF-TESTNET >$data_dir/fullnode.properties
+cat <<EOF-TESTNET >$fullnode_properties
 network=TestNet
 server.ip=$SERVERIP
 server.port=7070
@@ -46,7 +47,7 @@ EOF-TESTNET
 elif [[ $ACTION == "mainnet" ]];
 then
 logging_file_name="FullNode1";
-cat <<EOF-MAINNET >$data_dir/fullnode.properties
+cat <<EOF-MAINNET >$fullnode_properties
 network=MainNet
 server.ip=$SERVERIP
 server.port=7070
@@ -71,8 +72,8 @@ regular.token.fullnode.fee=1
 EOF-MAINNET
 fi
 
-chown root:root $data_dir/fullnode.properties
-chgrp root $data_dir/fullnode.properties
+chown root:root $fullnode_properties
+chgrp root $fullnode_properties
 
 #########################################
 # Download Clusterstamp
