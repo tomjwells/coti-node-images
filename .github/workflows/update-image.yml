@@ -10,7 +10,7 @@ on:
 
 env:
   DOCKERHUB_USERNAME: atomnode
-  IMAGE_NAME: coti-node
+  IMAGE_NAME: coti-node-test
 
 jobs:
   check-for-new-release:
