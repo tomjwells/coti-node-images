@@ -79,7 +79,7 @@ chgrp root $fullnode_properties
 # Download Clusterstamp
 #########################################
 
-CLUSTERSTAMP_FILE=$data_dir/FullNode1_clusterstamp.csv
+CLUSTERSTAMP_FILE=/app/FullNode1_clusterstamp.csv
 if [ -f $CLUSTERSTAMP_FILE ]; then
   echo "Clusterstamp $CLUSTERSTAMP_FILE exists."
 else
