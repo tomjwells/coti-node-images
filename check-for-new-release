@@ -16,7 +16,11 @@ def get_json(url):
 
 
 latest_release = get_json("https://api.github.com/repos/coti-io/coti-node/releases")[0]['tag_name']
-latest_image = get_json(f"https://hub.docker.com/v2/repositories/{os.environ.get('DOCKERHUB_USERNAME')}/{os.environ.get('IMAGE_NAME')}/tags")['results'][1]['name']
+dockerhub_result = get_json(f"https://hub.docker.com/v2/repositories/{os.environ.get('DOCKERHUB_USERNAME')}/{os.environ.get('IMAGE_NAME')}/tags")['results']
+if len(dockerhub_result) > 0:
+  latest_image = dockerhub_result[1]['name']
+else:
+  latest_image = None
 
 if latest_release == latest_image:
   is_new_release = "❌"
