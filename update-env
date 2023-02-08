@@ -80,7 +80,7 @@ chgrp root $fullnode_properties
 #########################################
 
 CLUSTERSTAMP_FILE=$data_dir/FullNode1_clusterstamp.csv
-if [ -f $FILE ]; then
+if [ -f $CLUSTERSTAMP_FILE ]; then
   echo "Clusterstamp $CLUSTERSTAMP_FILE exists."
 else
   if [[ $ACTION == "testnet" ]];
