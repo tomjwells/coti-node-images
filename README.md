@@ -23,7 +23,7 @@ This section gives a high-level overview of the build process executed by <a hre
 Most of the workflow file is general to any github action that builds a container image and pushes it to a container registry. The important step, in which slight modifications are made to the basic Coti node repository, is one called "Modify coti-node Repository", which performs the following operations before executing the build:
 
 1. Clones the official Coti release.
-2. Copy a script (<a href="https://github.com/tj-wells/coti-node-images/blob/master/update-env" target="_blank">update-env</a>), which uses the container's environment variables to generate a new `fullnode.properties` file.
+2. Copy a script ([create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties)), which uses the container's environment variables to generate a new `fullnode.properties` file.
 
 # Workflow runs that created previous images
 
@@ -31,11 +31,11 @@ Since there are many workflow runs in which no image is built, it can become har
 
 | Coti Node Version |                                          Workflow Run                                          |                                                                            Dockerhub Image                                                                             |
 | :---------------: | :--------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|       3.1.3       | <a href="https://github.com/tomjwells/coti-node-images/actions/runs/4200467449">4200467449</a> | <a href="https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-143cd458730407585b5bb50eef658e3104cd38e251504d779e7e6dd0cd20b725?context=repo">3.1.3</a> |
+|       3.1.3       | [4200498828](https://github.com/tomjwells/coti-node-images/actions/runs/4200498828) | [3.1.3](https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-0bef7395d3de26da3af5a04d37301f7d5e5d13a6f4e43d68a0c5a5ead727bb20?context=repo) |
 
 # How Can I Use these Docker Images?
 
-Great question! I have an example repository with a guide that suggests a method for running a Coti node using Docker, along with tried-and-tested `docker-compose` files that I use to run my node.
+Great question! See [this repository](https://github.com/tomjwells/coti-node) for an example and accompanying guide that suggests a method for running a Coti node using Docker, along with tried-and-tested `docker-compose` files, which I use to run my node.
 
 # Stay Coti
 
