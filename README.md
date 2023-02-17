@@ -28,7 +28,7 @@ Most of the workflow file is general to any github action that builds a containe
 Since there are many workflow runs in which no image is built, it can become hard to find the workflow runs that actually generated new Docker images. A log of the Docker images of each new version of the Coti software and the workflow runs that built them will be kept below.
 
 | Coti Node Version | Workflow Run | Dockerhub Image |
-| ----------------- | ------------ | --------------- |
+| :---------------: | :----------: | :-------------: |
 | 3.1.3  | <a href="https://github.com/tomjwells/coti-node-images/actions/runs/4199560627">4199560627</a>  | <a href="https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-143cd458730407585b5bb50eef658e3104cd38e251504d779e7e6dd0cd20b725?context=repo">3.1.3</a> |
 
 
