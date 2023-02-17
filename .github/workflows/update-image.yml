@@ -61,7 +61,7 @@ jobs:
       - name: Modify coti-node Repository
         run: |
           git clone https://github.com/coti-io/coti-node --branch ${{ needs.check-for-new-release.outputs.release-version }}
-          cp update-env coti-node
+          cp create-properties coti-node
 
       - name: Cache Docker layers
         uses: actions/cache@v2
