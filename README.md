@@ -1,6 +1,6 @@
 # Coti Node Image Builder
 
-This repository supplements the repository, <a href="https://github.com/tj-wells/coti-node" target="_blank">Coti Node Docker Installation Method</a>, which proposes a simple method for installing and maintaining Coti nodes using Docker containers.
+This repository supports the repository, <a href="https://github.com/tj-wells/coti-node" target="_blank">Coti Node Docker Installation Method</a>, which proposes a simple method for installing and maintaining Coti nodes using Docker containers.
 
 This repository periodically checks for new coti-node <a href="https://github.com/coti-io/coti-node/releases" target="_blank">releases</a>, and if a new release is found, a container image of the release is built in an open-source and publicly transparent way, so that the images it generates can be trusted.
 
@@ -14,7 +14,7 @@ This repository uses Github actions to check for new releases of the <a href="ht
 - To view recent runs of the workflows themselves, <a href="https://github.com/tj-wells/coti-node-images/actions"  target="_blank">click here</a>.
 - The images produced by this repository can be found in <a href="https://hub.docker.com/r/atomnode/coti-node"  target="_blank">this Dockerhub container registry</a>.
 
-# Overview of the Build Process
+# 🐳 Overview of the Build Process
 
 This section gives a high-level overview of the build process executed by <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml" target="_blank">this workflow file</a>.
 
