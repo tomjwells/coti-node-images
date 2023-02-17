@@ -35,7 +35,7 @@ Since there are many workflow runs in which no image is built, it can become har
 
 # How Can I Use these Docker Images?
 
-Great question! See [this repository](https://github.com/tomjwells/coti-node) for an example and accompanying guide that suggests a method for running a Coti node using Docker, along with tried-and-tested `docker-compose` files, which I use to run my node.
+Great question. See [this repository](https://github.com/tomjwells/coti-node) for an example and accompanying guide that suggests a method for running a Coti node using Docker, along with tried-and-tested `docker-compose` files, which I use to run my node.
 
 # Stay Coti
 
