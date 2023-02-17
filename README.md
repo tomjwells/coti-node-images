@@ -25,7 +25,7 @@ Most of the workflow file is general to any github action that builds a containe
 
 # Workflow runs that created previous images
 
-Since there are many workflow runs in which no image is built, a log of the versions of the Coti software and the workflow runs that built them will be kept below.
+Since there are many workflow runs in which no image is built, it can become hard to find the workflow runs that actually generated new Docker images. A log of the Docker images of each new version of the Coti software and the workflow runs that built them will be kept below.
 
 | Coti Node Version | Workflow Run | Dockerhub Image |
 | ----------------- | ------------ | --------------- |
