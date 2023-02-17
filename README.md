@@ -29,7 +29,7 @@ Since there are many workflow runs in which no image is built, a log of the vers
 
 | Coti Node Version | Workflow Run | Dockerhub Image |
 | ----------------- | ------------ | --------------- |
-| 3.1.3  | <a href="https://github.com/tomjwells/coti-node-images/actions/runs/4199560627">4199560627</a>  | <a href="https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-143cd458730407585b5bb50eef658e3104cd38e251504d779e7e6dd0cd20b725?context=repo">atomnode/coti-node:3.1.3</a> |
+| 3.1.3  | <a href="https://github.com/tomjwells/coti-node-images/actions/runs/4199560627">4199560627</a>  | <a href="https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-143cd458730407585b5bb50eef658e3104cd38e251504d779e7e6dd0cd20b725?context=repo">3.1.3</a> |
 
 
 # Stay Coti
