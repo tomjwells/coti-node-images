@@ -10,10 +10,11 @@ This repository uses <a href="https://docs.github.com/en/actions">GitHub Actions
 
 Below is a description of the important components to this reponsitory:
 
-- The GitHub Action workflow file itself, that describes the build process, is at <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml"  target="_blank">.github/workflows/update-image.yml</a>.
-- To view recent runs of the workflows themselves, <a href="https://github.com/tj-wells/coti-node-images/actions"  target="_blank">click here</a>.
-- The images produced by this repository can be found in <a href="https://hub.docker.com/r/atomnode/coti-node"  target="_blank">this Dockerhub container registry</a>.
-- <a href="https://github.com/tj-wells/coti-node-images/blob/master/update-env" target="_blank">update-env</a> is the script used to build a `fullnode.properties` file from the environment variables inside the Docker container. It also downloads the appropriate clustestamp file for MainNet or TestNet when necessary.
+- <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml"  target="_blank">.github/workflows/update-image.yml</a> - The GitHub Action workflow file itself, that describes the build process
+- <a href="https://github.com/tj-wells/coti-node-images/blob/master/create-properties" target="_blank">create-properties</a> - the script used to build a `fullnode.properties` file from the environment variables inside the Docker container. It also downloads the appropriate clustestamp file for MainNet or TestNet when necessary.
+- <a href="https://github.com/tj-wells/coti-node-images/actions"  target="_blank">GitHub Actions workflow runs</a>
+- <a href="https://hub.docker.com/r/atomnode/coti-node"  target="_blank">Dockerhub container registry</a> - Where the images produced by this repository are stored.
+
 
 # 🐳 Overview of the Build Process
 
@@ -31,6 +32,10 @@ Since there are many workflow runs in which no image is built, it can become har
 | Coti Node Version |                                          Workflow Run                                          |                                                                            Dockerhub Image                                                                             |
 | :---------------: | :--------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |       3.1.3       | <a href="https://github.com/tomjwells/coti-node-images/actions/runs/4200467449">4200467449</a> | <a href="https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-143cd458730407585b5bb50eef658e3104cd38e251504d779e7e6dd0cd20b725?context=repo">3.1.3</a> |
+
+# How Can I Use these Docker Images?
+
+Great question! I have an example repository with a guide that suggests a method for running a Coti node using Docker, along with tried-and-tested `docker-compose` files that I use to run my node.
 
 # Stay Coti
 
