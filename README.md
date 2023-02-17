@@ -23,6 +23,15 @@ Most of the workflow file is general to any github action that builds a containe
 1. Clone the official Coti release.
 2. Copy a script (<a href="https://github.com/tj-wells/coti-node-images/blob/master/update-env" target="_blank">update-env</a>), which uses the container's environment variables to generate a new `fullnode.properties` file.
 
+# Workflow runs that created previous images
+
+Since there are many workflow runs in which no image is built, a log of the versions of the Coti software and the workflow runs that built them will be kept below.
+
+| Coti Node Version | Workflow Run | Dockerhub Image |
+| ----------------- | ------------ | --------------- |
+| 3.1.3  | <a href="https://github.com/tomjwells/coti-node-images/actions/runs/4199560627">4199560627</a>  | <a href="https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-143cd458730407585b5bb50eef658e3104cd38e251504d779e7e6dd0cd20b725?context=repo">atomnode/coti-node:3.1.3</a> |
+
+
 # Stay Coti
 
 Stay Coti. ️‍🔥
