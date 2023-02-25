@@ -10,11 +10,11 @@ This repository uses <a href="https://docs.github.com/en/actions">GitHub Actions
 
 Below is a description of the important components to this repository:
 
-- <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml"  target="_blank">.github/workflows/update-image.yml</a> - The GitHub Action workflow file itself, that describes the build process
-- <a href="https://github.com/tj-wells/coti-node-images/blob/master/create-properties" target="_blank">create-properties</a> - the script used to build a `fullnode.properties` file from the environment variables inside the Docker container. It also downloads the appropriate clusterstamp file for MainNet or TestNet when necessary.
-- <a href="https://github.com/tj-wells/coti-node-images/actions"  target="_blank">GitHub Actions workflow runs</a>
-- <a href="https://hub.docker.com/r/atomnode/coti-node"  target="_blank">Dockerhub container registry</a> - Where the images produced by this repository are stored.
-
+- [.github/workflows/update-image.yml](https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml) - The GitHub Action workflow file itself, that describes the build process
+- [create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties) - A script that generates a  `fullnode.properties` file from the environment variables within the Docker container. It also downloads the appropriate clusterstamp file for MainNet or TestNet when necessary.
+- [check-for-new-release](https://github.com/tomjwells/coti-node-images/blob/master/check-for-new-release) - A short python script that checks whether the latest Coti release version is equal to the most recent Dockerhub image tag.  
+- [Dockerhub container registry](https://hub.docker.com/r/atomnode/coti-node) - Where the images produced by this repository are stored.
+- [GitHub Actions workflow runs](https://github.com/tj-wells/coti-node-images/actions)
 
 # 🐳 Overview of the Build Process
 
@@ -27,7 +27,7 @@ Most of the workflow file is general to any GitHub action that builds a containe
 
 # Workflow runs that created previous images
 
-Since there are many workflow runs in which no image is built, it can become hard to find the workflow runs that actually generated new Docker images. The table below is used to keep a log of the Docker images of each new version of the Coti software and the workflow runs that built them.
+Since there are many workflow runs in which no image is built, it can be difficult to find the workflow runs that actually created new Docker images. The table below is used to keep a log of the Docker images of each new version of the Coti software and the workflow runs that built them.
 
 | Coti Node Version |                                          Workflow Run                                          |                                                                            Dockerhub Image                                                                             |
 | :---------------: | :--------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
