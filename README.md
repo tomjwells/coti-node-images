@@ -31,11 +31,11 @@ Since there are many workflow runs in which no image is built, it can become har
 
 | Coti Node Version |                                          Workflow Run                                          |                                                                            Dockerhub Image                                                                             |
 | :---------------: | :--------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|       3.1.3       | [4200498828](https://github.com/tomjwells/coti-node-images/actions/runs/4200498828) | [3.1.3](https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-0bef7395d3de26da3af5a04d37301f7d5e5d13a6f4e43d68a0c5a5ead727bb20?context=repo) |
+|       [3.1.3](https://github.com/coti-io/coti-node/releases/tag/3.1.3)       | [4200498828](https://github.com/tomjwells/coti-node-images/actions/runs/4200498828) | [3.1.3](https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-0bef7395d3de26da3af5a04d37301f7d5e5d13a6f4e43d68a0c5a5ead727bb20?context=repo) |
 
 # How Can I Use these Docker Images?
 
-Great question. See [this repository](https://github.com/tomjwells/coti-node) for an example and accompanying guide that suggests a method for running a Coti node using Docker, along with tried-and-tested `docker-compose` files, which I use to run my node.
+See [this repository](https://github.com/tomjwells/coti-node) for an example and accompanying guide that suggests a method for running a Coti node using Docker. This repository contains the exact `docker-compose` files I use to run my node.
 
 # Stay Coti
 
