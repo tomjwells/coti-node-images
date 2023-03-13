@@ -31,7 +31,7 @@ Since there are many workflow runs in which no image is built, it can be difficu
 
 | Coti Node Version |                                          Workflow Run                                          |                                                                            Dockerhub Image                                                                             |
 | :---------------: | :--------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|       [3.1.3](https://github.com/coti-io/coti-node/releases/tag/3.1.3)       | [4200498828](https://github.com/tomjwells/coti-node-images/actions/runs/4200498828) | [3.1.3](https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-0bef7395d3de26da3af5a04d37301f7d5e5d13a6f4e43d68a0c5a5ead727bb20?context=repo) |
+|       [3.1.3](https://github.com/coti-io/coti-node/releases/tag/3.1.3)       | [4400299976](https://github.com/tomjwells/coti-node-images/actions/runs/4400299976) | [3.1.3](https://hub.docker.com/layers/atomnode/coti-node/3.1.3/images/sha256-f5f7e78d8e03fbda62f6840eda2efd2610db9029d0f60b3696bc5cf8b3d44a3f?context=repo) |
 
 # How Can I Use these Docker Images?
 
