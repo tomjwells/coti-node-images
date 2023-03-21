@@ -4,9 +4,7 @@ This repository periodically checks the releases of the official [coti-node](htt
 
 Please dig in to the code. If you have ideas or input for the Coti node images, please feel free to let me know or make a pull request.
 
-# What does this Repository do?
-
-This repository uses <a href="https://docs.github.com/en/actions">GitHub Actions</a> to check for new releases of the <a href="https://github.com/coti-io/coti-node">official coti-node repository</a>, and if a new version is found, it builds a Docker image of the new release, and pushes it to Dockerhub.
+# Which files are involved in the build process?
 
 The contents of this repo are kept deliberately minimal, so as to make as few changes as possible to the base Coti node software. 
 
