@@ -18,10 +18,12 @@ Below are the three files involved in the build process:
 
 This section gives a high-level overview of the build process executed by <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml" target="_blank">this workflow file</a>.
 
-Most of the workflow file is general to any GitHub action that builds a container image and pushes it to a container registry. The important step, in which slight modifications are made to the basic Coti node repository, is one called "Modify coti-node Repository", which performs the following operations before executing the build:
+Most of the workflow file is common to any GitHub action that builds a container image and pushes it to a container registry. The main step of interest, in which slight modifications are made to the basic Coti node repository, is one called "Modify coti-node Repository", which performs the following operations before executing the build:
 
 1. Clones the official Coti release.
-2. Copy a script ([create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties)), which uses the container's environment variables to generate a new `fullnode.properties` file.
+2. Copies the script ([create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties)), into the directory so that it is shipped along with the original code.
+
+Note that the original Dockerfile by Coti is used to generate the image.
 
 # Workflow runs that created previous images
 
