@@ -1,6 +1,6 @@
 # Coti Node Image Builder
 
-This repository uses GitHub Actions to periodically check for new coti-node <a href="https://github.com/coti-io/coti-node/releases" target="_blank">releases</a>, and if a new release is available, a container image of the release is automatically built and pushed to [Dockerhub](https://hub.docker.com/r/atomnode/coti-node/tags) in an open-source and publicly transparent way, so that the generated images can be trusted. These images are produced by a Coti community member, for the Coti community to use as they wish.
+This repository periodically checks for releases of the official [coti-node](https://github.com/coti-io/coti-node/releases) repository, and if a new release is available, a Docker image of the release is automatically built and pushed to [Dockerhub](https://hub.docker.com/r/atomnode/coti-node/tags). The advantage of doing this process in GitHub actions, is that not only is the code open-source and transparent, but the builds of the images are too. These images are produced by a Coti community member, for the Coti community to use as they wish.
 
 Please dig in to the code. If you have ideas or input for the Coti node images, please feel free to let me know or make a pull request.
 
@@ -8,15 +8,13 @@ Please dig in to the code. If you have ideas or input for the Coti node images, 
 
 This repository uses <a href="https://docs.github.com/en/actions">GitHub Actions</a> to check for new releases of the <a href="https://github.com/coti-io/coti-node">official coti-node repository</a>, and if a new version is found, it builds a Docker image of the new release, and pushes it to Dockerhub.
 
-The contents of this repo are kept deliberately simple so as to make as few changes as possible to the base Coti node software. 
+The contents of this repo are kept deliberately minimal, so as to make as few changes as possible to the base Coti node software. 
 
-Below are the only two files involved in the process of building an image:
+Below are the three files involved in the build process:
 
 - [.github/workflows/update-image.yml](https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml) - The GitHub Action workflow file itself, that describes the build process
+- [check-for-new-release](https://github.com/tomjwells/coti-node-images/blob/master/check-for-new-release) - A python script called by update-image.yml, which is simply used to check that the latest Coti node version matches the latest Docker image.
 - [create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties) - A script that generates a  `fullnode.properties` file from the environment variables. This is to be run in the Docker container before launching the main Coti node program. It also downloads the appropriate clusterstamp file for MainNet or TestNet when necessary.
-
-The repository includes an additional python script, used in the update-image.yml, which is simply used to check that the latest Coti node version matches the latest Docker image.
-- [check-for-new-release](https://github.com/tomjwells/coti-node-images/blob/master/check-for-new-release)
 
 # 🐳 Overview of the Build Process
 
