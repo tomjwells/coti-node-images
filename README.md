@@ -23,8 +23,6 @@ Most of the workflow file is common to any GitHub action that builds a container
 1. Clones the official Coti release.
 2. Copies the script ([create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties)), into the directory so that it is shipped along with the original code.
 
-Note that the original Dockerfile by Coti is used to generate the image.
-
 # Workflow runs that created previous images
 
 Since there are many workflow runs in which no image is built, it can be difficult to find the workflow runs that actually created new Docker images. The table below is used to keep a log of the Docker images of each new version of the Coti software and the workflow runs that built them.
