@@ -1,6 +1,6 @@
 # Coti Node Image Builder
 
-This repository periodically checks the releases of the official [coti-node](https://github.com/coti-io/coti-node/releases) repository, and if a new release is available, a Docker image of the release is automatically built and pushed to [Dockerhub](https://hub.docker.com/r/atomnode/coti-node/tags). The advantage of doing this process in GitHub actions, is that not only is the code open-source and transparent, but the *builds* of the images themselves are too. These images are produced by a Coti community member, for the Coti community to use as they wish.
+This repository periodically checks the releases of the official [coti-node](https://github.com/coti-io/coti-node/releases) repository, and if a new release is found, a Docker image of the release is automatically built and pushed to [Dockerhub](https://hub.docker.com/r/atomnode/coti-node/tags). The advantage of doing this process in GitHub actions, is that not only is the code open-source and transparent, but the *builds* of the images themselves are too. These images are produced by a Coti community member, for the Coti community to use as they wish.
 
 Please dig in to the code. If you have ideas or input for the Coti node images, please feel free to let me know or make a pull request.
 
@@ -11,17 +11,14 @@ The contents of this repo are kept deliberately minimal, so as to make as few ch
 Below are the three files involved in the build process:
 
 - [.github/workflows/update-image.yml](https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml) - The GitHub Action workflow file itself, that describes the build process
-- [check-for-new-release](https://github.com/tomjwells/coti-node-images/blob/master/check-for-new-release) - A python script called by update-image.yml, which is simply used to check that the latest Coti node version matches the latest Docker image.
+- [check-for-new-release](https://github.com/tomjwells/coti-node-images/blob/master/check-for-new-release) - A short python script called by update-image.yml, which checks that the latest Coti node version matches the latest Docker image tag.
 - [create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties) - A script that generates a  `fullnode.properties` file from the environment variables. This is to be run in the Docker container before launching the main Coti node program. It also downloads the appropriate clusterstamp file for MainNet or TestNet when necessary.
 
 # 🐳 Overview of the Build Process
 
 This section gives a high-level overview of the build process executed by <a href="https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml" target="_blank">this workflow file</a>.
 
-Most of the workflow file is common to any GitHub action that builds a container image and pushes it to a container registry. The main step of interest, in which slight modifications are made to the basic Coti node repository, is one called "Modify coti-node Repository", which performs the following operations before executing the build:
-
-1. Clones the official Coti release.
-2. Copies the script ([create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties)), into the directory so that it is shipped along with the original code.
+Most of the workflow file is common to any GitHub action that builds a container image and pushes it to a container registry. The main step of interest, in which slight modifications are made to the basic Coti node repository, is one called "Modify coti-node Repository", which performs only one change to the Coti repository, which is to copy in the file [create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties) before performing the build. This is done so that that script may be run on launching the container to create the `fullnode.properties` file from environment variables.
 
 # Workflow runs that created previous images
 
@@ -39,4 +36,4 @@ See [this repository](https://github.com/tomjwells/coti-node) for an example and
 
 Stay Coti. ️‍🔥
 
-<p align="center"><a href="https://atomnode.tomoswells.com" target="_blank"><img src="https://cdn.discordapp.com/avatars/343604221331111946/65130831872c9daabdb0d803ce27e594.webp?size=240"></a></p>
+<p align="center"><a href="https://atomnode.tomoswells.com" target="_blank"><img src="https://media.discordapp.net/attachments/465686348234358804/1088843067425050784/atoms-3-01.png?width=852&height=850" style="width: 330px"></a></p>
