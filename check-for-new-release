@@ -21,7 +21,7 @@ latest_image = dockerhub_response[1]['name'] if len(dockerhub_response) > 0 else
 
 if latest_release == latest_image:
   is_new_release = "❌"
-  print(f"✨ No new release found. The latest release is {latest_release} and the latest image version is {latest_image}. No build needed. This workflow run has completed successfully.")
+  print(f"✨ No new release found. The latest release is {latest_release} and the latest image version is {latest_image}. No build is needed and his workflow run has completed successfully.")
 else:
   is_new_release = "✅"
   print(f"✅ New release found (version {latest_release}).")
