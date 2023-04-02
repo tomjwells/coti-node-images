@@ -12,7 +12,7 @@ If you have ideas or input for the Coti node images, please feel free to let me 
 
 The most important file in the build process, is the GitHub actions workflow: [.github/workflows/update-image.yml](https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml). 
 
-Most of the workflow file is common to any GitHub action that builds a container image and pushes it to a container registry. The only modification to the main coti-node repository, is that a script called [create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties) is added, which can be used to generate a valid `fullnode.properties` file from environment variables.
+Most of the workflow file is standard to a GitHub action that builds a container image and pushes it to a container registry. The only modification to the main coti-node repository, is that a script called [create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties) is included, which allows node operators to generate `fullnode.properties` file from environment variables and downloads the appropriate clusterstamp file.
 
 # Previous Builds
 
