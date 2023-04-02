@@ -24,7 +24,7 @@ The fact that there are many workflow runs makes it challenging to locate the wo
 
 # How do I use these images?
 
-[This repository](https://github.com/tomjwells/coti-node) contains a docker-compose configuration file and an accompanying guide for running a Coti node with Docker.
+[This repository](https://github.com/tomjwells/coti-node), contains a docker-compose configuration file and an accompanying guide for running a Coti node with Docker.
 
 # Stay Coti
 
