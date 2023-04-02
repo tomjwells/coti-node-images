@@ -6,7 +6,7 @@ Please dig in to the code. This repository has been kept deliberately minimal, s
 
 If you have ideas or input for the Coti node images, please feel free to let me know or make a pull request.
 
-# 🏗️ The Build Process
+# 🔨 The Build Process
 
 The most important file in the build process, is the GitHub actions workflow: [.github/workflows/update-image.yml](https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml). 
 
