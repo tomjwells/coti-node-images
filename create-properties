@@ -145,7 +145,7 @@ else
   fi
   echo "Downloading clusterstamp."
   curl -sL $CLUSTERSTAMP_URL --output $CLUSTERSTAMP_FILE
-  echo "Download completed."
+  echo "Download complete."
 fi
 
 chown root:root $CLUSTERSTAMP_FILE
