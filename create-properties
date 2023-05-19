@@ -59,7 +59,7 @@ if [ -z ${FEE_PERCENTAGE} ]; then
   FEE_PERCENTAGE=1
 fi
 
-# Calculate dervied variables 
+# Calculate derived variables 
 SERVER_URL=https://$SERVERNAME
 LOGGING_FILE_NAME="FullNode1";
 data_dir=/app/data
