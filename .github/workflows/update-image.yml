@@ -2,7 +2,7 @@ name: Build Image if new Release is Found
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '0 * * * *'
     # https://github.blog/changelog/2019-11-01-github-actions-scheduled-jobs-maximum-frequency-is-changing/
   push:
     branches:
