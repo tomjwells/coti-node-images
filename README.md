@@ -1,12 +1,12 @@
 # Coti Fullnode Image Builder
 
-This repository periodically checks for new releases of the official [coti-node](https://github.com/coti-io/coti-node/releases) repository, and when a new release is found, a Docker image of the release is built and pushed to [Dockerhub](https://hub.docker.com/r/atomnode/coti-node/tags). This process is handled using GitHub actions, which allows the builds to be open source as well as the code.
+This repository periodically checks for new versions of the official [coti-node](https://github.com/coti-io/coti-node/releases) repository, and when a new release is found, a Docker image of the release is built and pushed to [Dockerhub](https://hub.docker.com/r/atomnode/coti-node/tags). This process is handled using GitHub actions, which allows the builds themselves to be public as well as the code.
 
-These images are produced by a Coti community member, with the goal of producing high quality and reliable Docker images for the rest of the Coti community to use.
+These images are produced by a Coti community member, with the goal of producing reliable and safe Docker images for the rest of the Coti community to use.
 
-Please feel free to dig in to the code. This repository has deliberately been kept small, so that the images are as close as possible to how the Coti team intend for their software to be used. 
+Please feel free to dig in to the code. This repository has deliberately been kept small, so that the images are as close as possible to how the Coti intend for their software to be used. 
 
-If you have ideas or input, please feel free to let me know or make a pull request.
+If you have any input, please feel free to let me know or make a pull request.
 
 # 🔨 The Build Process
 
