@@ -30,4 +30,4 @@ The fact that there are many workflow runs makes it challenging to locate the wo
 
 Stay Coti. ️‍🔥
 
-<p align="center"><a href="https://atomnode.tomoswells.com" target="_blank"><img src="https://media.discordapp.net/attachments/465686348234358804/1088843067425050784/atoms-3-01.png?width=852&height=850" style="width: 330px"></a></p>
+<p align="center"><a href="https://atomnode.tomoswells.com" target="_blank"><img src="https://pay.coti.io/nodes/atomnode.png" style="width: 200px"></a></p>
