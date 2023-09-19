@@ -16,7 +16,7 @@ If you have any input, please feel free to let me know or make a pull request.
 
 The instructions for building the Docker image using Github actions are in the file [.github/workflows/update-image.yml](https://github.com/tj-wells/coti-node-images/blob/master/.github/workflows/update-image.yml). 
 
-Most of the workflow file is common to GitHub actions that build a container image and upload it to a container registry. The only non-stadard step performed, is that a script called [create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties) is included. `[create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties)`is used to generate a `fullnode.properties` file using environment variables passed to the container, and downloads the appropriate clusterstamp file.
+Most of the workflow file is common to GitHub actions that build a container image and upload it to a container registry. The only non-stadard step performed, is that a script called [create-properties](https://github.com/tj-wells/coti-node-images/blob/master/create-properties) is included. `create-properties` is a script that generates a `fullnode.properties` file using environment variables passed to the container, and downloads the appropriate clusterstamp file.
 
 # Previous Builds
 
